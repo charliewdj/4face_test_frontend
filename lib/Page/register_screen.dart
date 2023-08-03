@@ -3,6 +3,9 @@
 import 'package:flutter/material.dart';
 import 'package:four_face_frontend/components/my_textfield.dart';
 
+import '../components/my_button.dart';
+import '../components/my_button_small.dart';
+
 
 
 class RegisterScreen extends StatefulWidget {
@@ -22,6 +25,8 @@ class _HomeScreenState extends State<RegisterScreen> {
   // text editing controllers
   final usernameController = TextEditingController();
   final passwordController = TextEditingController();
+
+  void signUserIn() {}
 
   int currentStep = 0;
 
@@ -134,8 +139,19 @@ class _HomeScreenState extends State<RegisterScreen> {
                     Step(
                       title: const Text(''),
                       content: Padding(
-                        padding: EdgeInsets.only(right: 15),
-                        child: const Text('生年月日', style: TextStyle(fontSize: 22)),
+                        padding: const EdgeInsets.symmetric(horizontal: 0.0, vertical: 0.0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text('生年月日', style: TextStyle(fontSize: 22)),
+                            MyTextField(
+
+                              controller: usernameController,
+                              hintText: 'Username',
+                              obscureText: false,
+                            ),
+                          ],
+                        ),
                       ),
                       isActive: currentStep >= 0,
                       state: currentStep >= 1 ? StepState.complete : StepState
@@ -143,7 +159,31 @@ class _HomeScreenState extends State<RegisterScreen> {
                     ),
                     Step(
                       title: const Text(''),
-                      content: const Text('性別', style: TextStyle(fontSize: 22)),
+                      content: Column(
+                        children: [
+                          Text('性別', style: TextStyle(fontSize: 22)),
+                          Padding(
+                            padding: const EdgeInsets.only(top: 48),
+                            child: Row(
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.only(right: 16),
+                                  child: MyButtonSmall(
+                                    buttonText: "男性",
+                                    onTap: signUserIn,
+                                    color: Color(0xffF2F2F0),
+                                  ),
+                                ),
+                                MyButtonSmall(
+                                  buttonText: "女性",
+                                  onTap: signUserIn,
+                                  color: Color(0xffF2F2F0),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
                       isActive: currentStep >= 0,
                       state: currentStep >= 2 ? StepState.complete : StepState
                           .disabled,
