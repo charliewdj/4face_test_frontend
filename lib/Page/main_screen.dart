@@ -19,90 +19,61 @@ class MainScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.yellow,
+      backgroundColor: Color(0xffB5E825),
       body: SafeArea(
         child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const SizedBox(height: 50),
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const SizedBox(height: 50),
 
-              // logo
-              Image.asset(
-                'lib/Images/4face.png',
-                width: 100,
-                height: 100,
-              ),
-
-              const SizedBox(height: 50),
-
-
-
-
-              const SizedBox(height: 25),
-
-              // username textfield
-
-
-              const SizedBox(height: 10),
-
-              // password textfield
-
-
-              const SizedBox(height: 10),
-
-              // forgot password?
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 25.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    Text(
-                      'Forgot Password?',
-                      style: TextStyle(color: Colors.grey[600]),
-                    ),
-                  ],
+                // logo
+                Image.asset(
+                  'lib/Images/4face.png',
+                  width: 100,
+                  height: 100,
                 ),
-              ),
 
-              const SizedBox(height: 25),
 
-              // sign in button
-              MyButton(
-                iconImagePath: 'lib/Images/apple.png',
-                buttonText: "Apple で登録する",
-                onTap: signUserIn,
-              ),
 
-              const SizedBox(height: 20),
 
-              MyButton(
-                iconImagePath: 'lib/Images/line.png',
-                buttonText: "Line で登録する",
-                onTap: signUserIn,
-              ),
 
-              const SizedBox(height: 20),
+                const SizedBox(height: 25),
 
-              MyButton(
+                // sign in button
+                MyButton(
+                  iconImagePath: 'lib/Images/apple.png',
+                  buttonText: "Apple で登録する",
+                  onTap: signUserIn,
+                ),
 
-                buttonText: "メールアドレスで登録する",
-                onTap: signUserIn,
-              ),
+                const SizedBox(height: 20),
 
-              // or continue with
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 25.0),
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: Divider(
-                        thickness: 0.5,
-                        color: Colors.grey[400],
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                MyButton(
+                  iconImagePath: 'lib/Images/line.png',
+                  buttonText: "Line で登録する",
+                  onTap: signUserIn,
+                ),
+
+                const SizedBox(height: 20),
+
+                MyButton(
+
+                  buttonText: "メールアドレスで登録する",
+                  onTap: signUserIn,
+                ),
+
+                // or continue with
+ 
+
+                
+
+
+                  Flexible(
+                    child: Padding(
+                      padding: const EdgeInsets.only(top: 16.0),
                       child: Text(
                         '続けることにより、あなたは利用規約に同意し、'
                             'プライバジーポリシーに同意した上で4face'
@@ -110,41 +81,48 @@ class MainScreen extends StatelessWidget {
                         style: TextStyle(color: Colors.grey[700]),
                       ),
                     ),
-                    Expanded(
-                      child: Divider(
-                        thickness: 0.5,
-                        color: Colors.grey[400],
+                  ),
+
+                    Divider(
+                      thickness: 0.5,
+                      color: Colors.grey[400],
+                    ),
+
+
+
+
+
+
+                // not a member? register now
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(top: 50.0),
+                      child: Text(
+                        'すでに登録済みの方はこちら',
+                        style: TextStyle(color: Colors.grey[700]),
                       ),
                     ),
+                    const SizedBox(width: 4),
                   ],
                 ),
-              ),
 
-              const SizedBox(height: 50),
+                // google + apple sign in buttons
+                Padding(
+                  padding: const EdgeInsets.only(top: 8.0),
+                  child: MyButton(
 
-              // not a member? register now
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    'すでに登録済みの方はこちら',
-                    style: TextStyle(color: Colors.grey[700]),
+                    buttonText: "ログインする",
+                    onTap: signUserIn,
                   ),
-                  const SizedBox(width: 4),
-                ],
-              ),
+                ),
 
-              // google + apple sign in buttons
-              MyButton(
-
-                buttonText: "ログインする",
-                onTap: signUserIn,
-              ),
-
-              const SizedBox(height: 50),
+                const SizedBox(height: 50),
 
 
-            ],
+              ],
+            ),
           ),
         ),
       ),
