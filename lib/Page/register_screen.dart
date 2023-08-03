@@ -166,14 +166,12 @@ class _HomeScreenState extends State<RegisterScreen> {
                             padding: const EdgeInsets.only(top: 48),
                             child: Row(
                               children: [
-                                Padding(
-                                  padding: const EdgeInsets.only(right: 16),
-                                  child: MyButtonSmall(
+                                MyButtonSmall(
                                     buttonText: "男性",
                                     onTap: signUserIn,
                                     color: Color(0xffF2F2F0),
                                   ),
-                                ),
+                                SizedBox(width: 16),
                                 MyButtonSmall(
                                   buttonText: "女性",
                                   onTap: signUserIn,
