@@ -81,25 +81,25 @@ class _HomeScreenState extends State<RegisterScreen> {
       ),
       body: Theme(
         data: ThemeData(
-          accentColor: Colors.orange,
+          hintColor: Colors.orange,
           primarySwatch: Colors.orange,
           colorScheme: ColorScheme.light(
               primary: Colors.orange
           ),
         ),
         child: Padding(
-          padding: const EdgeInsets.only(top: 130),
+          padding: const EdgeInsets.only(top: 0),
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
             child: Center(
               child: SizedBox(
-                width: 216.0,
-                height: 24,
+                // width: 216.0,
+                // height: 24,
 
                 child: Stepper(
                   elevation: 0,
                   //Horizontal Impact
-                  margin: const EdgeInsets.all(1),
+                  margin: const EdgeInsets.all(24),
                   //vertical impact
                   controlsBuilder: controlBuilders,
                   type: StepperType.horizontal,
@@ -109,19 +109,22 @@ class _HomeScreenState extends State<RegisterScreen> {
                   onStepCancel: cancelStep,
                   currentStep: currentStep,
                   //0, 1, 2
+
                   steps: [
                     Step(
                         title: const Text(''),
                         content: Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 32.0, vertical: 48.0),
+                          padding: const EdgeInsets.symmetric(horizontal: 0.0, vertical: 0.0),
                           child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text('ニックネーム', style: TextStyle(fontSize: 22)),
                               MyTextField(
-                                  controller: usernameController,
-                                  hintText: 'Username',
-                                  obscureText: false,
-                                ),
+
+                                controller: usernameController,
+                                hintText: 'Username',
+                                obscureText: false,
+                              ),
                             ],
                           ),
                         ),
