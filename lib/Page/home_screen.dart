@@ -1,7 +1,7 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_icons/flutter_icons.dart';
+//import 'package:flutter_icons/flutter_icons.dart';
 import 'package:four_face_frontend/Page/main_screen.dart';
 import 'package:four_face_frontend/Page/register_screen.dart';
 
@@ -51,16 +51,19 @@ class _MainScreenState extends State<HomeScreen> {
             backgroundColor: Colors.white,
             items: [
               BottomNavigationBarItem(icon: Icon(
-                  MaterialCommunityIcons.home_variant, color: Colors.black),
+                  Icons.person_search, color: Colors.white),
+                  label: "",
+                  activeIcon: Icon(
+                      Icons.person_search, color: Colors.black)
+              ),
+              BottomNavigationBarItem(
+                  icon: Icon(Icons.person_add, color: Colors.black),
                   label: ""),
               BottomNavigationBarItem(
-                  icon: Icon(Ionicons.md_search, color: Colors.black),
+                  icon: Icon(Icons.favorite, color: Colors.black),
                   label: ""),
               BottomNavigationBarItem(
-                  icon: Icon(Ionicons.md_add_circle, color: Colors.black),
-                  label: ""),
-              BottomNavigationBarItem(
-                  icon: Icon(Icons.favorite, color: Colors.black), label: ""),
+                  icon: Icon(Icons.chat_bubble, color: Colors.black), label: ""),
               BottomNavigationBarItem(icon: Icon(
                   Icons.account_circle_outlined, color: Colors.black),
                   label: ""),
