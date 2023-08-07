@@ -2,6 +2,7 @@
 
 
 import 'package:flutter/material.dart';
+import 'package:four_face_frontend/Page/good_screen.dart';
 import 'package:four_face_frontend/Page/home_screen.dart';
 import 'package:four_face_frontend/Page/register_screen.dart';
 
@@ -62,7 +63,7 @@ class MatchScreen extends StatelessWidget {
                                 context,
                                 MaterialPageRoute(
                                   builder: (context) =>
-                                  RegisterScreen(),
+                                  GoodScreen(),
                                 ),
                               )),
                               child: Container(
@@ -174,25 +175,7 @@ class MatchScreen extends StatelessWidget {
                           ),
                         ),
                       ),
-                      Padding(
-                        padding: EdgeInsets.fromLTRB(16, 8, 16, 8),
-                        child: Container(
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(20),
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.grey,
-                                blurRadius: 10,
-                                spreadRadius: 2,
-                                offset: Offset(0, 3),
-                              )
-
-                            ]
-                          ),
-
-                        ),
-                      )
+                      //activechats
                     ],),
                   )
                 ],
