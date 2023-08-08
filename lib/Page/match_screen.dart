@@ -50,8 +50,7 @@ class MatchScreen extends StatelessWidget {
                     padding: const EdgeInsets.fromLTRB(16, 16, 16 ,8),
                     child: Text('新規マッチング', style: TextStyle(fontWeight : FontWeight.bold,),),
                   ),
-                  Container(
-                    child: SizedBox(
+                  SizedBox(
                       width: 358,
                       height: 126,
                       child: ListView.builder(
@@ -86,98 +85,14 @@ class MatchScreen extends StatelessWidget {
                                             'https://shorturl.at/zBK38'),
                                     )
                                 ),
-                                child:  Stack(
-                                  children: [
-                                    Align(
-                                      alignment: Alignment.bottomCenter,
-                                      child: Container(
-                                        height: 136,
-                                        decoration: BoxDecoration(
-                                          borderRadius: const BorderRadius.only(
-                                            bottomLeft: Radius.circular(10),
-                                            bottomRight: Radius.circular(10)
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                    Align(
-                                      alignment: Alignment.center,
-                                      child: Padding(
-                                        padding: EdgeInsets.symmetric(
-                                            horizontal: 16,
-                                            vertical: 20,
-                                      ),
-                                        child: Column(
-                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                          crossAxisAlignment: CrossAxisAlignment.start,
-                                          children: [
-                                            Row(
-                                              children: [
-                                                Container(
-                                                  decoration: BoxDecoration(
-                                                    borderRadius: BorderRadius.
-                                                      circular(
-                                                      10
-                                                    ),
-                                                    color: Colors.pinkAccent,
-                                                  ),
-                                                  padding: EdgeInsets.symmetric(
-                                                    horizontal: 8,
-                                                    vertical: 4,
-                                                  ),
-                                                  child: Row(
-                                                    children: [
-                                                      Icon(Icons.thumb_up, color: Colors.white,),
-                                                      const SizedBox(
-                                                        width: 2,
-                                                      ),
-                                                      Text(
-                                                        '1',
-                                                        style: TextStyle(
-                                                          fontSize: 13,
-                                                          color: Colors.white
-                                                        ),
-                                                      )
-                                                    ],
-                                                  ),
-                                                ),
-                                                Column(
-                                                  children: [
-                                                    Text('NEW')
-                                                  ],
-                                                )
-                                              ],
-                                            )
-                                          ],
-                                        ),
-                                      )
-                                    )
-                                  ],
-                                ),
+                                child: IconBox()          //good icon box
                               ),
 
                             );
                           }
                       ),
                     ),
-                  ),
-                  Scaffold(
-                    drawer: Drawer(),
-                    body: ListView(children: [
-                      Padding(
-                        padding: EdgeInsets.fromLTRB(16, 16, 16, 8),
-                        child: Text(
-                          'トークを待ち',
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 12,
-                            fontWeight: FontWeight.bold
-                          ),
-                        ),
-                      ),
-                      //activechats
-                    ],),
-                  )
+                  ChatBox()
                 ],
               ),
             ),
@@ -192,4 +107,116 @@ class MatchScreen extends StatelessWidget {
     );
   }
 }
+
+
+
+class IconBox extends StatelessWidget {
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      child: Stack(
+        children: [
+          Align(
+            alignment: Alignment.bottomCenter,
+            child: Container(
+              height: 136,
+              decoration: BoxDecoration(
+                borderRadius: const BorderRadius.only(
+                    bottomLeft: Radius.circular(10),
+                    bottomRight: Radius.circular(10)
+                ),
+              ),
+            ),
+          ),
+          Align(
+              alignment: Alignment.topRight,
+              child: Padding(
+                padding: EdgeInsets.only(top: 4, right: 4),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    // Row(
+                    //   children: [
+                        Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.
+                            circular(
+                                10
+                            ),
+                            color: Colors.pinkAccent,
+                          ),
+                          padding: EdgeInsets.symmetric(
+                            horizontal: 8,
+                            vertical: 4,
+                          ),
+                          child: SizedBox(
+                            width: 24,
+                            height: 10,
+                            child: Row(
+                              children: [
+                                Icon(Icons.thumb_up, color: Colors.white, size: 10,),
+                                const SizedBox(
+                                  width: 4,
+                                ),
+                                Text(
+                                  '1',
+                                  style: TextStyle(
+                                      fontSize: 10,
+                                      color: Colors.white
+                                  ),
+                                )
+                              ],
+                            ),
+                          ),
+                        ),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          children: [
+                            Align(
+                                alignment: Alignment.bottomRight,
+                                child: Text('NEW'))
+                          ],
+                        )
+                      ],
+                    )
+                  //],
+                ),
+              )
+          //)
+        ],
+      ),
+    );
+  }
+}
+
+class ChatBox extends StatelessWidget {
+
+  @override
+  Widget build(BuildContext context) {
+    return ListView(
+      children: [
+        Padding(
+          padding: EdgeInsets.fromLTRB(16, 16, 16, 8),
+          child: Text(
+            'トークを待ち',
+            style: TextStyle(
+                color: Colors.black,
+                fontSize: 12,
+                fontWeight: FontWeight.bold
+            ),
+          ),
+        ),
+        //activechats
+      ],);
+  }
+}
+
+
+
+
+
+
+
 

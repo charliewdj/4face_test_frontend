@@ -33,9 +33,26 @@ class GoodScreen extends StatelessWidget {
                 physics: const NeverScrollableScrollPhysics
                 ( ),
                 crossAxisCount: 2,
-                itemCount: images.length,,
+                itemCount: 5,
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 20
+                ),
+                itemBuilder: (context, index){
+                  return Column(
+                    children: [
+                      Stack(
+                        children: [
+                          Positioned(
+                            child: ClipRect(
 
-              )
+                            ),
+                      )
+                    ],
+                  )
+                    ],
+                  );
+                },
+              ),
             ],
           )
       ),
