@@ -1,6 +1,7 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:four_face_frontend/Page/chat_screen.dart';
 //import 'package:flutter_icons/flutter_icons.dart';
 import 'package:four_face_frontend/Page/main_screen.dart';
 import 'package:four_face_frontend/Page/match_screen.dart';
@@ -90,7 +91,7 @@ class _MainScreenState extends State<HomeScreen> {
             children: [
               SearchScreen(),
               MatchScreen(),
-              MainScreen(),
+              ChatScreen(),
               RegisterScreen(),
             ],
             onPageChanged: onPageChanged,

@@ -16,15 +16,16 @@ class GoodScreen extends StatelessWidget {
           elevation: 0,
           title: Row(
             children: [
-              Padding(
-                padding: const EdgeInsets.fromLTRB(12, 12, 174, 12),
-                child: Icon(Icons.arrow_back_ios, color: Colors.black,),
+              Align(
+                alignment: Alignment.centerLeft,
+                child: Padding(
+                  padding: const EdgeInsets.fromLTRB(0, 12, 0, 12),
+                  child: Icon(Icons.arrow_back_ios, color: Colors.black,),
+                ),
               ),
 
-              Align(
-                alignment: Alignment.center,
-                // child: Padding(
-                //   padding: const EdgeInsets.fromLTRB(130, 12, 80, 12),
+               Padding(
+                   padding: const EdgeInsets.fromLTRB(130, 12, 80, 12),
                   child: Text('Good', style: TextStyle(
                       color: Colors.black
                   ),
@@ -32,7 +33,8 @@ class GoodScreen extends StatelessWidget {
                 ),
               ),
 
-              SizedBox(height: 1,),
+              //SizedBox(height: 1,),
+
             ],
           )
       ),
@@ -59,12 +61,12 @@ class Grid extends StatelessWidget {
       itemCount: 5,
       itemBuilder: (_,index){
         return Container(
-          height: 250,
+          height: 22,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(
               16.0
           ),
-          color: Color(0xf00000099),
+          color: Color(0xff2E2E2E),
           ),
           child: Column(
             children: [
@@ -75,7 +77,7 @@ class Grid extends StatelessWidget {
                   ),
                   child: Image.network(
                       'https://shorturl.at/fgwH1',
-                    height: 170,
+                    height: 220,
                     width: double.infinity,
                     fit: BoxFit.cover,
                   )
@@ -84,9 +86,9 @@ class Grid extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text('Minami'),
+                    Text('Minami', style: TextStyle(color: Colors.white),),
                     const SizedBox(height: 8.0,),
-                    Text('25歳・東京'),
+                    Text('25歳・東京', style: TextStyle(color: Colors.white),),
               ],),)
             ],
           ),
