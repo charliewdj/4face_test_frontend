@@ -23,19 +23,20 @@ class GoodScreen extends StatelessWidget {
 
               Align(
                 alignment: Alignment.center,
-                child: Padding(
-                  padding: const EdgeInsets.fromLTRB(180, 12, 80, 12),
+                // child: Padding(
+                //   padding: const EdgeInsets.fromLTRB(130, 12, 80, 12),
                   child: Text('Good', style: TextStyle(
                       color: Colors.black
-                  ),),
+                  ),
+                  // ),
                 ),
               ),
 
               SizedBox(height: 1,),
-              Grid(),
             ],
           )
       ),
+      body: Grid(),
     );
 
   }
@@ -48,7 +49,7 @@ class Grid extends StatelessWidget {
   Widget build(BuildContext context) {
     return GridView.builder(
       shrinkWrap: true,
-      physics: const NeverScrollableScrollPhysics(),
+      // physics: const NeverScrollableScrollPhysics(),
       gridDelegate:const SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2,
           crossAxisSpacing: 12.0,

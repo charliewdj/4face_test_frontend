@@ -13,7 +13,7 @@ class MatchScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length: 3,
+      length: 2,
       child: Scaffold(
         appBar: AppBar(
           title: 
@@ -195,24 +195,26 @@ class ChatBox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView(
-      shrinkWrap: true,
-      physics: NeverScrollableScrollPhysics(),
-      children: [
-        Padding(
-          padding: EdgeInsets.fromLTRB(16, 16, 16, 8),
-          child: Text(
-            'トークを待ち',
-            style: TextStyle(
-                color: Colors.black,
-                fontSize: 12,
-                fontWeight: FontWeight.bold
+    return Expanded(
+      child: ListView(
+        shrinkWrap: true,
+        // physics: NeverScrollableScrollPhysics(),
+        children: [
+          Padding(
+            padding: EdgeInsets.fromLTRB(16, 16, 16, 8),
+            child: Text(
+              'トークを待ち',
+              style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 12,
+                  fontWeight: FontWeight.bold
+              ),
             ),
           ),
-        ),
-        //ActiveChats(),
-        RecentChat(),
-      ],);
+          //ActiveChats(),
+          RecentChat(),
+        ],),
+    );
   }
 }
 
