@@ -9,12 +9,7 @@ import '../components/my_button_small.dart';
 
 
 class RegisterScreen extends StatefulWidget {
-
-
-
   RegisterScreen({super.key});
-
-
 
   @override
   State<RegisterScreen> createState() => _HomeScreenState();

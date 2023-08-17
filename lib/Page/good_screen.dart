@@ -40,9 +40,7 @@ class GoodScreen extends StatelessWidget {
       ),
       body: Grid(),
     );
-
   }
-
 }
 
 class Grid extends StatelessWidget {
