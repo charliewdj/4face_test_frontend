@@ -2,6 +2,7 @@
 
 
 import 'package:flutter/material.dart';
+import 'package:four_face_frontend/Page/find_friends_screen2.dart';
 
 class FindFriendsScreen extends StatelessWidget {
   const FindFriendsScreen({Key? key}) : super(key: key);
@@ -55,26 +56,36 @@ class FindFriendsScreen extends StatelessWidget {
                     ),
                   ),
 
-                  SizedBox(height: 200,),
+                  SizedBox(height: 430,),
 
-                  Container(
-                      padding: EdgeInsets.all(16),
-                      decoration: BoxDecoration(
-                        color: Color(0xffB5E825),
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                      child: Center(
-                        child: Column(
-                          children: [
-                            Text('友達を探す', style: TextStyle(fontSize: 12),),
-                          ],
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => FindFriendsScreen2()),
+                      );
+                    },
+                    child: Container(
+                        padding: EdgeInsets.all(16),
+                        decoration: BoxDecoration(
+                          color: Color(0xffB5E825),
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                        child: Center(
+                          child: Column(
+                            children: [
+                              Text('友達を探す', style: TextStyle(fontSize: 12),),
+                            ],
+                          ),
                         ),
                       ),
-                    ),
+                  ),
 
                 ],
               ),
             ),
+
+
           ],
         ),
       ),

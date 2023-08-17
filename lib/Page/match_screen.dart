@@ -2,6 +2,7 @@
 
 
 import 'package:flutter/material.dart';
+import 'package:four_face_frontend/Page/four_face_match_screen.dart';
 import 'package:four_face_frontend/Page/good_screen.dart';
 import 'package:four_face_frontend/Page/home_screen.dart';
 import 'package:four_face_frontend/Page/register_screen.dart';
@@ -461,22 +462,29 @@ class Request extends StatelessWidget {
                                   // ),
                                   Row(
                                     children: [
-                                      Container(
-                                        height: 30 ,
-                                        width: 40,
-                                        alignment: Alignment.center,
-                                        decoration: BoxDecoration(
-                                          color: Color(0xff151B04),
-                                          borderRadius: BorderRadius.circular(25),
-
+                                      GestureDetector(
+                                        onTap: () {
+                                          Navigator.push(
+                                            context,
+                                            MaterialPageRoute(builder: (context) => FourFaceMatchScreen()),
+                                          );
+                                        },
+                                        child: Container(
+                                          height: 30,
+                                          width: 40,
+                                          alignment: Alignment.center,
+                                          decoration: BoxDecoration(
+                                            color: Color(0xff151B04),
+                                            borderRadius: BorderRadius.circular(25),
+                                          ),
+                                          child: Text(
+                                            "参加",
+                                            style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 10,
+                                              fontWeight: FontWeight.bold,
+                                            ),),
                                         ),
-                                        child: Text(
-                                          "参加",
-                                          style: TextStyle(
-                                            color: Colors.white,
-                                            fontSize: 10,
-                                            fontWeight: FontWeight.bold,
-                                          ),),
                                       ),
                                       SizedBox(width: 8,),
                                       Container(
