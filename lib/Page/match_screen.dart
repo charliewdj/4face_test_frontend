@@ -418,29 +418,33 @@ class Request extends StatelessWidget {
                         borderRadius: BorderRadius.circular(35),
                         child: Image.asset(
                           'lib/Images/profile.jpg',
+                          fit: BoxFit.fill,
                           height: 65,
                           width: 65,),
                       ),
-                      Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 20),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              "Doraemon, Nobita, Giant",
-                              style: TextStyle(
-                                  fontSize: 18,
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.bold),
-                            ),
+                      Flexible(
+                        child: Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 20),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                "Doraemon, Nobita, Giant",
+                                style: TextStyle(
+                                    fontSize: 18,
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.bold),
+                                  overflow: TextOverflow.ellipsis,
+                              ),
 
-                            SizedBox(height: 4,),
+                              SizedBox(height: 4,),
 
-                            Text("Doraemon の友達の承認待ちです。",
-                              style: TextStyle(
-                                fontSize: 12,
-                              ),)
-                          ],
+                              Text("Doraemon の友達の承認待ちです。",
+                                style: TextStyle(
+                                  fontSize: 12,
+                                ),)
+                            ],
+                          ),
                         ),
                       ),
                       //Spacer(),

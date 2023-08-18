@@ -86,60 +86,62 @@ class Grid extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GridView.builder(
-      shrinkWrap: true,
-      // physics: const NeverScrollableScrollPhysics(),
-      gridDelegate:const SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 2,
-        crossAxisSpacing: 12.0,
-        mainAxisSpacing: 12.0,
-        mainAxisExtent: 300,
-      ),
-      itemCount: 5,
-      itemBuilder: (_,index){
-        return GestureDetector(
-          onTap: (() => Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) =>
-                  UserInformationScreen(),
-            ),
-          )),
-          child: Container(
-            height: 22,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(
-                  16.0
+    return Flexible(
+      child: GridView.builder(
+        shrinkWrap: true,
+        // physics: const NeverScrollableScrollPhysics(),
+        gridDelegate:const SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 2,
+          crossAxisSpacing: 12.0,
+          mainAxisSpacing: 12.0,
+          mainAxisExtent: 300,
+        ),
+        itemCount: 5,
+        itemBuilder: (_,index){
+          return GestureDetector(
+            onTap: (() => Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) =>
+                    UserInformationScreen(),
               ),
-              color: Color(0xff2E2E2E),
-            ),
-            child: Column(
-              children: [
-                ClipRRect(
-                    borderRadius: const BorderRadius.only(
-                      topLeft: Radius.circular(16.0),
-                      topRight: Radius.circular(16.0),
-                    ),
-                    child: Image.network(
-                      'https://shorturl.at/fgwH1',
-                      height: 220,
-                      width: double.infinity,
-                      fit: BoxFit.cover,
-                    )
+            )),
+            child: Container(
+              height: 22,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(
+                    16.0
                 ),
-                Padding(padding: const EdgeInsets.all(8.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text('Minami', style: TextStyle(color: Colors.white),),
-                      const SizedBox(height: 8.0,),
-                      Text('25歳・東京', style: TextStyle(color: Colors.white),),
-                    ],),)
-              ],
+                color: Color(0xff2E2E2E),
+              ),
+              child: Column(
+                children: [
+                  ClipRRect(
+                      borderRadius: const BorderRadius.only(
+                        topLeft: Radius.circular(16.0),
+                        topRight: Radius.circular(16.0),
+                      ),
+                      child: Image.network(
+                        'https://shorturl.at/fgwH1',
+                        height: 220,
+                        width: double.infinity,
+                        fit: BoxFit.cover,
+                      )
+                  ),
+                  Padding(padding: const EdgeInsets.all(8.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text('Minami', style: TextStyle(color: Colors.white),),
+                        const SizedBox(height: 8.0,),
+                        Text('25歳・東京', style: TextStyle(color: Colors.white),),
+                      ],),)
+                ],
+              ),
             ),
-          ),
-        );
-      },
+          );
+        },
+      ),
     );
   }
 }
