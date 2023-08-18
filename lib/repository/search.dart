@@ -17,18 +17,22 @@ class SearchNotifier extends ChangeNotifier{
   SearchMember? showingMember;
 
   init() async{
+    print("initialize start");
     final res = await asyncGet("main/search/search.php", {}, globalJwt);
     final data = await jsonDecode(res) as List<dynamic>;
+    print("initialize start");
     bool isFirst = true;
     for (var element in data) {
-      final newMember = SearchMember(id: element["ID"]);
+      final newMember = await getAMember(id: element["ID"]);
       if(isFirst){
         showingMember = newMember;
         notifyListeners();
+        print("notified");
         isFirst = false;
       }
       members.add(newMember);
       notifyListeners();
+      print("notified");
     }
   }
 
@@ -59,31 +63,18 @@ class SearchNotifier extends ChangeNotifier{
     }
     notifyListeners();
   }
-}
 
-class SearchMember{
-  SearchMember({required String id}){
-    init(id: id);
-  }
-  
-  String? id;
-  String? name;
-  int? age;
-  String? place;
-  String? mainImage;
-  List<InstantMember> friends = [];
-  
-  init({required String id}) async {
+  Future<SearchMember> getAMember({required String id}) async {
     final res = await asyncGet("classResponce/member.php", {"ID":id}, globalJwt);
     Map<String,dynamic> data = await jsonDecode(res);
-    this.id = data["ID"];
-    name = data["name"];
+    String name = data["name"];
     final bdts = data["birthday"];
     final bd = DateTime.fromMillisecondsSinceEpoch(bdts * 1000);
-    age = AgeCalculator.age(bd).years;
-    place = data["place"];
-    mainImage = data["mainImage"];
+    int age = AgeCalculator.age(bd).years;
+    String place = data["place"];
+    String mainImage = data["mainImage"];
     final friendsRaw = data["pair"] as Map<String,dynamic>;
+    List<InstantMember> friends = [];
     friendsRaw.forEach((key, value) {
       final  fr = value as Map<String,dynamic>;
       final newfriend = InstantMember(id: fr["ID"],
@@ -94,5 +85,33 @@ class SearchMember{
       );
       friends.add(newfriend);
     });
+    return SearchMember(
+        id: id,
+        name: name,
+        age: age,
+        place: place,
+        mainImage: mainImage,
+        friends: friends
+    );
   }
+}
+
+class SearchMember{
+  SearchMember({
+    required this.id,
+    required this.name,
+    required this.age,
+    required this.place,
+    required this.mainImage,
+    required this.friends
+  });
+
+  String? id;
+  String? name;
+  int? age;
+  String? place;
+  String? mainImage;
+  List<InstantMember> friends = [];
+
+
 }

@@ -67,7 +67,7 @@ class TalkNotifier extends ChangeNotifier{
     );
     final newTalk = Talk(
         id: data["ID"],
-        male1: male1, male2: male2, female1: female1, female2: female2)
+        male1: male1, male2: male2, female1: female1, female2: female2);
   }
   
 }
