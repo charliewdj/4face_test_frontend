@@ -14,12 +14,12 @@ class OffersNotifier extends ChangeNotifier{
 
   init() async{
     final res = await asyncGet("main/match/offerList.php", {}, globalJwt);
-    if(res == "NULL"){return;}
+    if(res == ""){print("no offers");return;}
     final data = await jsonDecode(res) as List<dynamic>;
     for (var element in data) {
       final md = element["sender"] as Map<String,dynamic>;
       final newOffer = Offer(
-          talkID: element["talkID"],
+          talkID: element["matchID"],
           sender: InstantMember(
             id: md["ID"],
             name: md["name"],

@@ -1,9 +1,11 @@
 
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:four_face_frontend/repository/search.dart';
 
 
-class SearchScreen extends StatelessWidget {
+class SearchScreen extends ConsumerWidget {
   static const String routeName = '/';
 
   static Route route() {
@@ -14,7 +16,12 @@ class SearchScreen extends StatelessWidget {
         });
   }
 
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context,WidgetRef) {
+    SearchNotifier searchNotifier = WidgetRef.watch(searchProvider) as SearchNotifier;
+    final showing = searchNotifier.showingMember;
+
+
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,
@@ -77,7 +84,9 @@ class UserCard extends StatelessWidget {
 
   const UserCard({Key? key}) : super(key: key);
 
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context,WidgetRef) {
+    SearchNotifier searchNotifier = WidgetRef.watch(searchProvider as ProviderListenable<SearchNotifier>);
+
     return Padding(
       padding: const EdgeInsets.only(
           top: 10,

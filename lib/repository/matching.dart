@@ -61,6 +61,7 @@ class MatchNotifier extends ChangeNotifier{
   }
   change(index,pairID) async {
     final tgt = matchList[index];
+
     if(tgt.status > 3){return;}
     final res = await asyncGet("register/match/offerApprication.php", {"pairID":pairID,"matchID":tgt.id}, globalJwt);
     final response = await jsonDecode(res);
