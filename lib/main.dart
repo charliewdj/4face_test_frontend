@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:four_face_frontend/Page/good_screen.dart';
 import 'package:four_face_frontend/Page/home_screen.dart';
+import 'package:four_face_frontend/Page/invitation_waiting_screen.dart';
 import 'package:four_face_frontend/Page/match_screen.dart';
 import 'package:four_face_frontend/Page/register_screen.dart';
+import 'package:four_face_frontend/Page/wait_verification_screen.dart';
 
 import 'Page/main_screen.dart';
 

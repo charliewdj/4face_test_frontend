@@ -2,6 +2,7 @@
 
 
 import 'package:flutter/material.dart';
+import 'package:four_face_frontend/Page/find_friends_screen.dart';
 import 'package:four_face_frontend/Page/profile_edit_screen.dart';
 
 class ProfileScreen extends StatefulWidget {
@@ -201,18 +202,26 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
                     SizedBox(width: 200,),
 
-                    Expanded(
-                      child: Container(
-                        padding: EdgeInsets.all(16),
-                        decoration: BoxDecoration(
-                          color: Color(0xffB5E825),
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                        child: Center(
-                          child: Column(
-                            children: [
-                              Text('友達を探す', style: TextStyle(fontSize: 12),),
-                            ],
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => FindFriendsScreen()),
+                        );
+                      },
+                      child: Expanded(
+                        child: Container(
+                          padding: EdgeInsets.all(16),
+                          decoration: BoxDecoration(
+                            color: Color(0xffB5E825),
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                          child: Center(
+                            child: Column(
+                              children: [
+                                Text('友達を探す', style: TextStyle(fontSize: 12),),
+                              ],
+                            ),
                           ),
                         ),
                       ),

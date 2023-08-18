@@ -2,6 +2,7 @@
 
 
 import 'package:flutter/material.dart';
+import 'package:four_face_frontend/Page/four_face_match_screen.dart';
 import 'package:four_face_frontend/Page/good_screen.dart';
 import 'package:four_face_frontend/Page/home_screen.dart';
 import 'package:four_face_frontend/Page/register_screen.dart';
@@ -27,7 +28,6 @@ class MatchScreen extends StatelessWidget {
               ),
           backgroundColor: Colors.white,
           bottom: const TabBar(
-
             indicatorColor: Colors.black,
             labelColor: Colors.black,
             tabs: [
@@ -97,9 +97,14 @@ class MatchScreen extends StatelessWidget {
               ),
             ),
 
-            Container(
+            ListView(
+              shrinkWrap: true,
+              // physics: NeverScrollableScrollPhysics(),
+              children: [
 
-            )
+                //ActiveChats(),
+                Request(),
+              ],),
 
           ],
         ),
@@ -107,6 +112,9 @@ class MatchScreen extends StatelessWidget {
     );
   }
 }
+
+
+
 
 
 
@@ -373,6 +381,147 @@ class RecentChat extends StatelessWidget {
   }
 }
 
+
+class Request extends StatelessWidget {
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.only(top: 20),
+      padding: EdgeInsets.symmetric(horizontal: 10, vertical: 25),
+      decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(35),
+            topRight: Radius.circular(35),
+          ),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey.withOpacity(0.5),
+              blurRadius: 10,
+              spreadRadius: 2,
+              offset: Offset(0, 2),
+            )
+          ]),
+      child: SingleChildScrollView(
+        scrollDirection: Axis.vertical,
+        child: Column(
+          children: [
+            for (int i=0; i < 10; i++ )
+              Padding(padding: EdgeInsets.symmetric(vertical: 15),
+                child: InkWell(
+                  onTap: (){},
+                  child: Container(
+                    height: 65,
+                    child: Row(children: [
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(35),
+                        child: Image.asset(
+                          'lib/Images/profile.jpg',
+                          height: 65,
+                          width: 65,),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 20),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              "Doraemon, Nobita, Giant",
+                              style: TextStyle(
+                                  fontSize: 18,
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.bold),
+                            ),
+
+                            SizedBox(height: 4,),
+
+                            Text("Doraemon の友達の承認待ちです。",
+                              style: TextStyle(
+                                fontSize: 12,
+                              ),)
+                          ],
+                        ),
+                      ),
+                      //Spacer(),
+                      Padding(
+                        padding: const EdgeInsets.only(right: 3),
+                        child: Column(
+                          children: [
+                            Padding(
+                              padding: EdgeInsets.symmetric(horizontal: 0),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  // Text(
+                                  //   "12:10",
+                                  //   style: TextStyle(fontSize: 15),
+                                  // ),
+                                  // SizedBox(
+                                  //   height: 10,
+                                  // ),
+                                  Row(
+                                    children: [
+                                      GestureDetector(
+                                        onTap: () {
+                                          Navigator.push(
+                                            context,
+                                            MaterialPageRoute(builder: (context) => FourFaceMatchScreen()),
+                                          );
+                                        },
+                                        child: Container(
+                                          height: 30,
+                                          width: 40,
+                                          alignment: Alignment.center,
+                                          decoration: BoxDecoration(
+                                            color: Color(0xff151B04),
+                                            borderRadius: BorderRadius.circular(25),
+                                          ),
+                                          child: Text(
+                                            "参加",
+                                            style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 10,
+                                              fontWeight: FontWeight.bold,
+                                            ),),
+                                        ),
+                                      ),
+                                      SizedBox(width: 8,),
+                                      Container(
+                                        height: 30 ,
+                                        width: 40,
+                                        alignment: Alignment.center,
+                                        decoration: BoxDecoration(
+                                          color: Colors.grey,
+                                          borderRadius: BorderRadius.circular(25),
+
+                                        ),
+                                        child: Text(
+                                          "拒否",
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 10,
+                                            fontWeight: FontWeight.bold,
+                                          ),),
+                                      ),
+                                    ],
+                                  )
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      )
+                    ],
+                    ),
+                  ),
+                ),
+              )
+          ],),
+      ),
+    );
+  }
+}
 
 
 
