@@ -16,9 +16,17 @@ class SearchScreen extends ConsumerWidget {
         });
   }
 
+
   Widget build(BuildContext context,WidgetRef) {
     SearchNotifier searchNotifier = WidgetRef.watch(searchProvider) as SearchNotifier;
     final showing = searchNotifier.showingMember;
+    Widget userCard(){
+      if(showing != null){
+        return UserCard(image: showing?.mainImage, id: showing?.id, name: showing?.name, age: showing?.age, place: showing?.place);
+      }else{
+        return Container();
+      }
+    }
 
 
 
@@ -74,7 +82,8 @@ class SearchScreen extends ConsumerWidget {
           ],
         ),
       ),
-      body: UserCard(image: showing?.mainImage, id: showing?.id, name: showing?.name, age: showing?.age, place: showing?.place,),
+      body: userCard(),
+      // UserCard(image: showing?.mainImage, id: showing?.id, name: showing?.name, age: showing?.age, place: showing?.place,),
     );
   }
 }

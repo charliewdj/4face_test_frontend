@@ -24,6 +24,7 @@ class SearchNotifier extends ChangeNotifier{
       final newMember = SearchMember(id: element["ID"]);
       if(isFirst){
         showingMember = newMember;
+        notifyListeners();
         isFirst = false;
       }
       members.add(newMember);
