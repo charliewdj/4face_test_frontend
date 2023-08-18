@@ -157,7 +157,7 @@ class UserCard extends StatelessWidget {
                       fontSize: 24,
                   ),
                 ),
-                Text('25歳・東京',
+                Text('${age}・${place}',
                   style: Theme.of(context).textTheme.headline3!.copyWith(
                       color: Colors.white,
                       fontSize: 14,
