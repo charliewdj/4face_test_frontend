@@ -74,18 +74,21 @@ class SearchScreen extends ConsumerWidget {
           ],
         ),
       ),
-      body: UserCard(),
+      body: UserCard(image: showing?.mainImage, id: showing?.id, name: showing?.name, age: showing?.age, place: showing?.place,),
     );
   }
 }
 
 class UserCard extends StatelessWidget {
+  final String? image;
+  final String? id;
+  final String? name;
+  final int? age;
+  final String? place;
+  const UserCard({Key? key, required this.image, required this.id, required this.name, required this.age, required this.place}) : super(key: key);
 
+  Widget build(BuildContext context) {
 
-  const UserCard({Key? key}) : super(key: key);
-
-  Widget build(BuildContext context,WidgetRef) {
-    SearchNotifier searchNotifier = WidgetRef.watch(searchProvider as ProviderListenable<SearchNotifier>);
 
     return Padding(
       padding: const EdgeInsets.only(
@@ -109,7 +112,7 @@ class UserCard extends StatelessWidget {
                   image: DecorationImage(
                       fit: BoxFit.cover,
                       image: NetworkImage(
-                          'https://shorturl.at/dRVXY'
+                           image!
                       )
                   ),
                   borderRadius: BorderRadius.circular(5.0),

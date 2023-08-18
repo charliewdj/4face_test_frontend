@@ -57,4 +57,5 @@ class User extends ChangeNotifier{
       this.jwt = jwt;
       notifyListeners();
     }
+
 }

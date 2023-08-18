@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:four_face_frontend/Page/good_screen.dart';
 import 'package:four_face_frontend/Page/home_screen.dart';
 import 'package:four_face_frontend/Page/invitation_waiting_screen.dart';
@@ -9,7 +10,7 @@ import 'package:four_face_frontend/Page/wait_verification_screen.dart';
 import 'Page/main_screen.dart';
 
 void main() {
-  runApp(const MyApp());
+  const ProviderScope(child: MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -20,7 +21,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: InvitationWaitingScreen(),
+      home: HomeScreen(),
       );
   }
 }

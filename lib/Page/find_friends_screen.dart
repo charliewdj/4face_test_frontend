@@ -56,7 +56,7 @@ class FindFriendsScreen extends StatelessWidget {
                     ),
                   ),
 
-                  SizedBox(height: 430,),
+                  SizedBox(height: 300,),
 
                   GestureDetector(
                     onTap: () {
@@ -84,7 +84,6 @@ class FindFriendsScreen extends StatelessWidget {
                 ],
               ),
             ),
-
 
           ],
         ),
