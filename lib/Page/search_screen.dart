@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:four_face_frontend/class/Instant_member.dart';
 import 'package:four_face_frontend/repository/search.dart';
 
 
@@ -16,11 +17,10 @@ class SearchScreen extends ConsumerWidget {
         });
   }
 
-  Widget build(BuildContext context,WidgetRef) {
-    SearchNotifier searchNotifier = WidgetRef.watch(searchProvider) as SearchNotifier;
+
+  Widget build(BuildContext context,WidgetRef ref) {
+    SearchNotifier searchNotifier = ref.watch(searchProvider) as SearchNotifier;
     final showing = searchNotifier.showingMember;
-
-
 
     return Scaffold(
       appBar: AppBar(
@@ -74,22 +74,30 @@ class SearchScreen extends ConsumerWidget {
           ],
         ),
       ),
-      body: UserCard(image: showing?.mainImage, id: showing?.id, name: showing?.name, age: showing?.age, place: showing?.place,),
+      body: UserCard(member: showing),
     );
   }
 }
 
 class UserCard extends StatelessWidget {
-  final String? image;
-  final String? id;
-  final String? name;
-  final int? age;
-  final String? place;
-  const UserCard({Key? key, required this.image, required this.id, required this.name, required this.age, required this.place}) : super(key: key);
+  String image = "";
+  String id = "";
+  String name = "";
+  int age = 0;
+  String place = "";
+
+  UserCard({Key? key, required SearchMember? member}) : super(key: key){
+    image = member == null ? "" : member!.mainImage!;
+    id = member == null ? "" : member!.id!;
+    name = member == null ? "" : member!.name!;
+    age = member == null ? 0 : member!.age!;
+    place = member == null ? "" : member!.place!;
+  }
 
   Widget build(BuildContext context) {
-
-
+    if(id == ""){
+      return Container();
+    }
     return Padding(
       padding: const EdgeInsets.only(
           top: 10,
@@ -143,7 +151,7 @@ class UserCard extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                Text('Doraemon',
+                Text(name,
                   style: Theme.of(context).textTheme.headline2!.copyWith(
                       color: Colors.white,
                       fontSize: 24,
