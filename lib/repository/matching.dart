@@ -10,7 +10,6 @@ import 'package:four_face_frontend/repository/user.dart';
 
 ChangeNotifierProvider matchProvider = ChangeNotifierProvider<MatchNotifier>((ref) => MatchNotifier());
 
-
 class MatchNotifier extends ChangeNotifier{
   MatchNotifier();
   List<Matching> matchList = [];
@@ -19,7 +18,7 @@ class MatchNotifier extends ChangeNotifier{
     final res = await asyncGet("main/match/matchList.php", {}, globalJwt);
     final data = await jsonDecode(res) as List<dynamic>;
     for (var element in data) {
-      final ID = element["ID"];
+      final id = element["ID"];
       final md = element["male1"];
       final male = InstantMember(
           id: md["ID"],
@@ -38,11 +37,10 @@ class MatchNotifier extends ChangeNotifier{
       );
       final ms = (element["male2"] == null) ? 0 : (element["male2"]["status"] == 1 ? 1 : 2);
       final fs = (element["female2"] == null) ? 0 : (element["female2"]["status"] == 1 ? 1 : 2);
-      print([ms,fs]);
       if(globalGender == "男性"){
         matchList.add(
             Matching(
-              ID: ID,
+              id: id,
               me: male,
               oppo: female,
               status: ms * 3 + fs
@@ -51,7 +49,7 @@ class MatchNotifier extends ChangeNotifier{
       }else{
         matchList.add(
             Matching(
-                ID: ID,
+                id: id,
                 me: female,
                 oppo: male,
                 status: fs * 3 + ms
@@ -64,7 +62,7 @@ class MatchNotifier extends ChangeNotifier{
   change(index,pairID) async {
     final tgt = matchList[index];
     if(tgt.status > 3){return;}
-    final res = await asyncGet("register/match/offerApprication.php", {"pairID":pairID,"matchID":tgt.ID}, globalJwt);
+    final res = await asyncGet("register/match/offerApprication.php", {"pairID":pairID,"matchID":tgt.id}, globalJwt);
     final response = await jsonDecode(res);
     if(response["result"] == "failed"){
       return;
@@ -73,7 +71,7 @@ class MatchNotifier extends ChangeNotifier{
     notifyListeners();
   }
   remove(index) async {
-    final res = await asyncGet("register/talk/talkRemoval.php", {"ID":matchList[index].ID}, globalJwt);
+    final res = await asyncGet("register/talk/talkRemoval.php", {"ID":matchList[index].id}, globalJwt);
     final response = await jsonDecode(res);
     if(response["result"] == "failed"){
       return;
@@ -84,13 +82,13 @@ class MatchNotifier extends ChangeNotifier{
 }
 class Matching{
   Matching({
-    required this.ID,
+    required this.id,
     required this.me,
     required this.oppo,
     required this.status,
   });
-  final ID;
+  final String id;
   final InstantMember me;
   final InstantMember oppo;
-  var status;
+  int status;
 }
