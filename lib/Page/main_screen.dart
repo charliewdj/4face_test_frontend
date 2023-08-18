@@ -36,10 +36,6 @@ class MainScreen extends StatelessWidget {
                   height: 100,
                 ),
 
-
-
-
-
                 const SizedBox(height: 25),
 
                 // sign in button

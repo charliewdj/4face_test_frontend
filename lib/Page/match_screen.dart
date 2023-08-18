@@ -2,17 +2,22 @@
 
 
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:four_face_frontend/Page/four_face_match_screen.dart';
 import 'package:four_face_frontend/Page/good_screen.dart';
 import 'package:four_face_frontend/Page/home_screen.dart';
 import 'package:four_face_frontend/Page/register_screen.dart';
+import 'package:four_face_frontend/repository/matching.dart';
 
-class MatchScreen extends StatelessWidget {
+class MatchScreen extends ConsumerWidget {
 
   const MatchScreen({Key? key}) : super(key : key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context,WidgetRef ref) {
+    MatchNotifier matchNotifier = ref.watch(matchProvider) as MatchNotifier;
+
+
     return DefaultTabController(
       length: 2,
       child: Scaffold(
