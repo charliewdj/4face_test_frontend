@@ -74,6 +74,7 @@ class SearchNotifier extends ChangeNotifier{
     String place = data["place"];
     String mainImage = data["mainImage"];
     final friendsRaw = data["pair"] as Map<String,dynamic>;
+
     List<InstantMember> friends = [];
     friendsRaw.forEach((key, value) {
       final  fr = value as Map<String,dynamic>;

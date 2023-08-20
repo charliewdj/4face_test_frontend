@@ -1,7 +1,10 @@
 
+//import 'dart:html';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:four_face_frontend/Page/invitation_waiting_screen.dart';
 import 'package:four_face_frontend/class/Instant_member.dart';
 import 'package:four_face_frontend/repository/search.dart';
 
@@ -74,7 +77,18 @@ class SearchScreen extends ConsumerWidget {
           ],
         ),
       ),
-      body: UserCard(member: showing),
+      body: Column(
+        children: [
+          UserCard(member: showing),
+          
+          Padding(
+            padding: const EdgeInsets.fromLTRB(16, 16, 16, 8),
+            child: FriendsCard(member: showing,),
+          )
+
+
+        ],
+      ),
     );
   }
 }
@@ -105,10 +119,10 @@ class UserCard extends StatelessWidget {
           right: 20
       ),
       child: SizedBox(
-        height: MediaQuery
-            .of(context)
-            .size
-            .height,
+        // height: MediaQuery
+        //     .of(context)
+        //     .size
+        //     .height,
         width: MediaQuery
             .of(context)
             .size
@@ -116,6 +130,8 @@ class UserCard extends StatelessWidget {
         child: Stack(
           children: [
             Container(
+              width: 680,
+              height: 500,
               decoration: BoxDecoration(
                   image: DecorationImage(
                       fit: BoxFit.cover,
@@ -123,7 +139,7 @@ class UserCard extends StatelessWidget {
                            image!
                       )
                   ),
-                  borderRadius: BorderRadius.circular(5.0),
+                  borderRadius: BorderRadius.circular(24),
                   boxShadow: [
                     BoxShadow(color: Colors.grey.withOpacity(0.5),
                       spreadRadius: 4,
@@ -134,8 +150,10 @@ class UserCard extends StatelessWidget {
               ),
             ),
             Container(
+              width: 680,
+              height: 500,
               decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(5.0),
+                  borderRadius: BorderRadius.circular(24),
                   gradient: LinearGradient(colors: [
                     Color.fromARGB(200, 0, 0, 0),
                     Color.fromARGB(0, 0, 0, 0),
@@ -146,7 +164,7 @@ class UserCard extends StatelessWidget {
               ),
             ),
             Positioned(
-              bottom: 30,
+              bottom: 20,
               left: 20,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -165,11 +183,132 @@ class UserCard extends StatelessWidget {
                   ),
                 ),
               ],),
+            ),  //ユーザーの名前と年齢・出身地
+
+            Positioned(
+              bottom: 20,
+              left: 200,
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Stack(
+                      children: [
+                        Image.asset('lib/Images/ecd.png'),
+
+                        Positioned(
+                          bottom: 15,
+                          left: 16,
+                            child: Image.asset('lib/Images/td.png')
+                        ),
+                      ]
+                  ),  //dislike button
+
+                  SizedBox(width: 24,),
+
+                  Stack(
+                      children: [
+                        Image.asset('lib/Images/ecu.png'),
+
+                        Positioned(
+                            bottom: 17,
+                            left: 18,
+                            child: Image.asset('lib/Images/tu.png')
+                        ),
+                      ]
+                  ),  //like button
+
+
+                ],),
             )
           ],
         ),
       ),
     );
   }
+}
+
+class FriendsCard extends StatelessWidget{
+  String image = "";
+  String id = "";
+  String name = "";
+  int age = 0;
+  String place = "";
+  List friends = [];
+
+  FriendsCard({Key? key, required SearchMember? member}) : super(key: key){
+    image = member == null ? "" : member!.mainImage!;
+    id = member == null ? "" : member!.id!;
+    name = member == null ? "" : member!.name!;
+    age = member == null ? 0 : member!.age!;
+    place = member == null ? "" : member!.place!;
+    friends = member == null ? [] : member!.friends!;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    if(id == ''){
+      return Container();
+    }
+
+    return Column(
+      children: [
+        Align(
+            alignment: Alignment.centerLeft,
+            child: Text('${name}の友達', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700),)
+        ),
+
+        SizedBox(height: 12,),
+
+
+        SizedBox(
+          width: 358,
+          height: 126,
+          child: ListView.builder(
+              scrollDirection: Axis.horizontal,
+              itemCount: friends.length,
+              itemBuilder: (context , index){
+                return GestureDetector(
+                  onTap: (() => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) =>
+                          InvitationWaitingScreen(),
+                    ),
+                  )),
+                  child: Container(
+                    height: 104,
+                    width: 80,
+                    margin: EdgeInsets.only(
+                      left: 16,
+                      right: 16,
+                      top: 8,
+                      bottom: 8,
+                    ),
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(
+                            10
+                        ),
+
+                        image: image != null
+                            ? DecorationImage(
+                          fit: BoxFit.cover,
+                          image: NetworkImage('${image}'),
+                        )
+                            : DecorationImage(
+                          fit: BoxFit.cover,
+                          image: NetworkImage('https://shorturl.at/inO47'),
+                        ),
+                    ),
+                    //child: IconBox()          //good icon box
+                  ),
+
+                );
+              }
+          ),
+        ),
+      ],
+    );
+  }
+
 }
 
