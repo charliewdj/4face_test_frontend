@@ -6,6 +6,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:four_face_frontend/Page/four_face_match_screen.dart';
 import 'package:four_face_frontend/Page/good_screen.dart';
 import 'package:four_face_frontend/Page/home_screen.dart';
+import 'package:four_face_frontend/Page/invitation_waiting_screen.dart';
 import 'package:four_face_frontend/Page/register_screen.dart';
 import 'package:four_face_frontend/repository/matching.dart';
 
@@ -106,13 +107,24 @@ class ToActMatch extends StatelessWidget{
               child: Stack(
                 children: [
                   GestureDetector(
-                    onTap: (() => Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) =>
-                            GoodScreen(),
-                      ),
-                    )),
+                    onTap: () {
+                      if (matches[index].status == 0) {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => GoodScreen(),
+                          ),
+                        );
+                      } else if (matches[index].status == 1){
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => InvitationWaitingScreen(id: matches[index].me.id),
+                          ),
+                        );
+                      }
+                    },
+
                     child: Container(
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(

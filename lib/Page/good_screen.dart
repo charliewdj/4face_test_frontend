@@ -2,14 +2,22 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:four_face_frontend/repository/matching.dart';
 
-class GoodScreen extends StatelessWidget {
+class GoodScreen extends ConsumerWidget {
 
-  const GoodScreen({Key? key}) : super(key: key);
+  List<Matching> toActMatchList = [];
+
+  GoodScreen({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+
+    MatchNotifier matchNotifier = ref.watch(matchProvider) as MatchNotifier;
+    toActMatchList = matchNotifier == null ? [] : matchNotifier!.toActMatchList!;
+
     return Scaffold(
       appBar: AppBar(
           backgroundColor: Colors.transparent,
@@ -38,12 +46,16 @@ class GoodScreen extends StatelessWidget {
             ],
           )
       ),
-      body: Grid(),
+      body: Grid(toActMatchList: toActMatchList,),
     );
   }
 }
 
 class Grid extends StatelessWidget {
+
+  final List<Matching> toActMatchList;
+
+  Grid({Key? key, required this.toActMatchList}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -56,7 +68,7 @@ class Grid extends StatelessWidget {
           mainAxisSpacing: 12.0,
           mainAxisExtent: 300,
       ),
-      itemCount: 5,
+      itemCount: toActMatchList.length,
       itemBuilder: (_,index){
         return Container(
           height: 22,
@@ -74,7 +86,7 @@ class Grid extends StatelessWidget {
                     topRight: Radius.circular(16.0),
                   ),
                   child: Image.network(
-                      'https://shorturl.at/fgwH1',
+                      '${toActMatchList[index].me.mainImage}',
                     height: 220,
                     width: double.infinity,
                     fit: BoxFit.cover,
@@ -84,9 +96,9 @@ class Grid extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text('Minami', style: TextStyle(color: Colors.white),),
+                    Text('${toActMatchList[index].me.name}', style: TextStyle(color: Colors.white),),
                     const SizedBox(height: 8.0,),
-                    Text('25歳・東京', style: TextStyle(color: Colors.white),),
+                    Text('${toActMatchList[index].me.age}歳・${toActMatchList[index].me.place}', style: TextStyle(color: Colors.white),),
               ],),)
             ],
           ),

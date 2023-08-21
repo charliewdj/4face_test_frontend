@@ -40,7 +40,7 @@ class SearchNotifier extends ChangeNotifier{
     if(showingMember == null){return;}
     final res = await asyncGet("register/like/like.php", {"ID":showingMember!.id!}, globalJwt);
     final data = await jsonDecode(res);
-    if(data["result"] == "failed"){return;}
+    //if(data["result"] == "failed"){return;}
     members.removeAt(0);
     if(members.isEmpty){
       init();
@@ -54,7 +54,7 @@ class SearchNotifier extends ChangeNotifier{
     if(showingMember == null){return;}
     final res = await asyncGet("register/like/dislike.php", {"ID":showingMember!.id!}, globalJwt);
     final data = await jsonDecode(res);
-    if(data["result"] == "failed"){return;}
+    //if(data["result"] == "failed"){return;}
     members.removeAt(0);
     if(members.isEmpty){
       init();
