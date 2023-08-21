@@ -1,19 +1,26 @@
 
 
 
+import 'package:age_calculator/age_calculator.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:four_face_frontend/class/Instant_member.dart';
+import 'package:four_face_frontend/repository/memberData.dart';
 
-class UserInformationScreen extends StatelessWidget {
-  const UserInformationScreen({Key? key}) : super(key: key);
-
+class UserInformationScreen extends ConsumerWidget {
+  const UserInformationScreen({Key? key,required this.id}) : super(key: key);
+  final String id;
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    MemberDataNotifier memberDataNotifier = ref.watch(memberDataProvider(id)) as MemberDataNotifier;
+    
+    
     return Scaffold(
       body: Stack(
         fit: StackFit.expand,
         children: [
           Image.network(
-          'https://shorturl.at/aBJX7',
+          memberDataNotifier.mainImage,
           fit: BoxFit.cover,
         ),
           DraggableScrollableSheet(
@@ -36,7 +43,8 @@ class UserInformationScreen extends StatelessWidget {
 }
 }
 
-Widget buildFood() => ListTile(
+Widget buildFood({required MemberDataNotifier member}) => ListTile(
+
   shape: RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(16))),
   title: Padding(
     padding: const EdgeInsets.fromLTRB(32, 32, 32, 16),
@@ -47,14 +55,14 @@ Widget buildFood() => ListTile(
           Align(
             alignment: Alignment.centerLeft,
             child: Text(
-                'Minami 22際',
-                style: TextStyle(fontSize: 26),
+                '${member.name} ${member.birthday == 0 ? AgeCalculator.age(DateTime.fromMillisecondsSinceEpoch(member.birthday * 1000)).years : "--"}歳',
+                style: const TextStyle(fontSize: 26),
             ),
           ),
-          SizedBox(height: 8,),
+          const SizedBox(height: 8),
           Align(
             alignment: Alignment.centerLeft,
-              child: Text('東京都')
+              child: Text(member.place)
           ),
         ],
       ),

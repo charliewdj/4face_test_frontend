@@ -12,7 +12,9 @@ ChangeNotifierProvider matchProvider = ChangeNotifierProvider<MatchNotifier>((re
 
 class MatchNotifier extends ChangeNotifier{
   MatchNotifier();
-  List<Matching> matchList = [];
+  List<Matching> toActMatchList = [];
+  List<Matching> actedMatchList = [];
+
 
   init() async {
     final res = await asyncGet("main/match/matchList.php", {}, globalJwt);
@@ -38,46 +40,58 @@ class MatchNotifier extends ChangeNotifier{
       final ms = (element["male2"] == null) ? 0 : (element["male2"]["status"] == 1 ? 1 : 2);
       final fs = (element["female2"] == null) ? 0 : (element["female2"]["status"] == 1 ? 1 : 2);
       if(globalGender == "男性"){
-        matchList.add(
-            Matching(
-              id: id,
-              me: male,
-              oppo: female,
-              status: ms * 3 + fs
-            )
+        final newMatching = Matching(
+          id: id,
+          me: male,
+          oppo: female,
+          status: ms * 3 + fs
         );
+        if(newMatching.status>3){
+          actedMatchList.add(newMatching);
+        }else{
+          toActMatchList.add(newMatching);
+        }
       }else{
-        matchList.add(
-            Matching(
-                id: id,
-                me: female,
-                oppo: male,
-                status: fs * 3 + ms
-            )
+        final newMatching = Matching(
+          id: id,
+          me: female,
+          oppo: male,
+          status: fs * 3 + ms
         );
+        if(newMatching.status>3){
+          actedMatchList.add(newMatching);
+        }else{
+          toActMatchList.add(newMatching);
+        }
       }
       notifyListeners();
     }
   }
   change(index,pairID) async {
-    final tgt = matchList[index];
+    final tgt = toActMatchList[index];
 
-    if(tgt.status > 3){return;}
     final res = await asyncGet("register/match/offerApprication.php", {"pairID":pairID,"matchID":tgt.id}, globalJwt);
     final response = await jsonDecode(res);
     if(response["result"] == "failed"){
       return;
     }
-    matchList[index].status += 3;
+    tgt.status += 3;
+    toActMatchList.removeAt(index);
+    actedMatchList.add(tgt);
     notifyListeners();
   }
-  remove(index) async {
-    final res = await asyncGet("register/talk/talkRemoval.php", {"ID":matchList[index].id}, globalJwt);
+  remove(index,bool hasActed) async {
+    final tgt = hasActed ? actedMatchList[index] : toActMatchList[index];
+    final res = await asyncGet("register/talk/talkRemoval.php", {"ID":tgt.id}, globalJwt);
     final response = await jsonDecode(res);
     if(response["result"] == "failed"){
       return;
     }
-    matchList.remove(matchList[index]);
+    if(hasActed){
+      actedMatchList.remove(actedMatchList[index]);
+    }else{
+      toActMatchList.remove(toActMatchList[index]);
+    }
     notifyListeners();
   }
 }
