@@ -2,13 +2,27 @@
 
 
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:four_face_frontend/Page/find_friends_result.dart';
 
+import 'package:four_face_frontend/repository/memberData.dart';
+
 class FindFriendsScreen extends StatelessWidget {
-  const FindFriendsScreen({Key? key}) : super(key: key);
+
+
+
+  String? inputTextId = '';
+
+  FindFriendsScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+
+    // onTapId() {
+    //   FindFriendsResult(id: inputTextId);
+    //
+    // }
+
     return DefaultTabController(
       length: 2,
       child: Scaffold(
@@ -42,7 +56,7 @@ class FindFriendsScreen extends StatelessWidget {
           children: [
 
             Padding(
-              padding: const EdgeInsets.fromLTRB(32, 120, 32, 48),
+              padding: const EdgeInsets.fromLTRB(32, 250, 32, 48),
               child: Column(
                 children: [
                   TextFormField(
@@ -54,7 +68,21 @@ class FindFriendsScreen extends StatelessWidget {
                       border: InputBorder.none,
                       labelText: 'IDを入力',
                     ),
+                    // validator: (value) {
+                    //   if (value == null || value.isEmpty) {
+                    //     return 'IDを入力してください';
+                    //   }
+                    //   return null;
+                    // },
+                    onSaved: (value) {
+                      inputTextId = value!;
+                    },
                   ),
+                  // SizedBox(height: 16.0),
+                  // ElevatedButton(
+                  //   onPressed: onTapId,
+                  //   child: Text('送信'),
+                  // ),
 
                   SizedBox(height: 300,),
 
@@ -62,7 +90,7 @@ class FindFriendsScreen extends StatelessWidget {
                     onTap: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => FindFriendsScreen2()),
+                        MaterialPageRoute(builder: (context) => FindFriendsResult(id: inputTextId)),
                       );
                     },
                     child: Container(

@@ -2,13 +2,31 @@
 
 
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:four_face_frontend/Page/find_friends_regisered.dart';
+import 'package:four_face_frontend/Page/find_friends_screen.dart';
+import 'package:four_face_frontend/repository/memberData.dart';
 
-class FindFriendsScreen2 extends StatelessWidget {
-  const FindFriendsScreen2({Key? key}) : super(key: key);
+class FindFriendsResult extends ConsumerWidget {
+
+  String id = '';
+  String name = '';
+  String imageUrl = '';
+  int age = 0;
+  String place = '';
+  FindFriendsResult({Key? key, required String? id}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+
+    MemberDataNotifier memberDataNotifier = ref.watch(memberDataProvider(id)) as MemberDataNotifier;
+
+    id = memberDataNotifier.id == null ? '' : memberDataNotifier.id;
+    name = memberDataNotifier.name == null ? '' : memberDataNotifier.name;
+    imageUrl = memberDataNotifier.mainImage == null ? '' : memberDataNotifier!.mainImage!;
+    age = memberDataNotifier.age == null ? 0 : memberDataNotifier!.age!;
+    place = memberDataNotifier.place == null ? '' : memberDataNotifier!.place!;
+
     return DefaultTabController(
       length: 2,
       child: Scaffold(
@@ -69,18 +87,18 @@ class FindFriendsScreen2 extends StatelessWidget {
                       ),
                       SizedBox(height: 16),
                       Text(
-                        'Minami',
+                        '${name}',
                         style: TextStyle(
                             fontWeight: FontWeight.w700, fontSize: 22),
                       ),
                       SizedBox(
                         height: 8,
                       ),
-                      Text('ID: Riku'),
+                      Text('ID: ${id}'),
                       SizedBox(
                         height: 8,
                       ),
-                      Text('22際　東京'),
+                      Text('${age}際・${place}'),
                     ],
                   ),
                   SizedBox(height: 30,),
@@ -89,7 +107,7 @@ class FindFriendsScreen2 extends StatelessWidget {
                     onTap: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => FindFriendsScreen3()),
+                        MaterialPageRoute(builder: (context) => FindFriendsRegistered()),
                       );
                     },
                     child: Container(
@@ -114,7 +132,7 @@ class FindFriendsScreen2 extends StatelessWidget {
                     onTap: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => FindFriendsScreen2()),
+                        MaterialPageRoute(builder: (context) => FindFriendsScreen()),
                       );
                     },
                     child: Container(

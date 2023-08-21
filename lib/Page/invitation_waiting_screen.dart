@@ -22,7 +22,7 @@ class InvitationWaitingScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context,WidgetRef ref) {
-    MemberDataNotifier memberDataNotifier = ref.watch(memberDataProvider(id));
+    MemberDataNotifier memberDataNotifier = ref.watch(memberDataProvider(id)) as MemberDataNotifier;
 
     return Scaffold(
       appBar: AppBar(

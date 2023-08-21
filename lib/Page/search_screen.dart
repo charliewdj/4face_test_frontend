@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:four_face_frontend/Page/invitation_waiting_screen.dart';
+import 'package:four_face_frontend/Page/user_information_screen.dart';
 import 'package:four_face_frontend/class/Instant_member.dart';
 import 'package:four_face_frontend/repository/search.dart';
 
@@ -79,7 +80,9 @@ class SearchScreen extends ConsumerWidget {
       ),
       body: Column(
         children: [
-          UserCard(member: showing, onTap: () {(ref.read(searchProvider) as SearchNotifier).like();}),
+          UserCard(member: showing, onTapLike: () {(ref.read(searchProvider) as SearchNotifier).like();},
+            onTapDislike: () {(ref.read(searchProvider) as SearchNotifier).disLike();},
+          ),
           
           Padding(
             padding: const EdgeInsets.fromLTRB(16, 16, 16, 8),
@@ -94,14 +97,16 @@ class SearchScreen extends ConsumerWidget {
 }
 
 class UserCard extends StatelessWidget {
+
   String image = "";
   String id = "";
   String name = "";
   int age = 0;
   String place = "";
-  final void Function() onTap;
+  final void Function() onTapLike;
+  final void Function() onTapDislike;
 
-  UserCard({Key? key, required SearchMember? member, required this.onTap}) : super(key: key){
+  UserCard({Key? key, required SearchMember? member, required this.onTapLike, required this.onTapDislike}) : super(key: key){
     image = member == null ? "" : member!.mainImage!;
     id = member == null ? "" : member!.id!;
     name = member == null ? "" : member!.name!;
@@ -192,26 +197,28 @@ class UserCard extends StatelessWidget {
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Stack(
-                      children: [
-                        Image.asset('lib/Images/ecd.png'),
+                  GestureDetector(
+                    onTap: onTapDislike,
+                    child: Stack(
+                        children: [
+                          Image.asset('lib/Images/ecd.png'),
 
-                        Positioned(
-                          bottom: 15,
-                          left: 16,
-                            child: Image.asset('lib/Images/td.png')
-                        ),
-                      ]
+                          Positioned(
+                            bottom: 15,
+                            left: 16,
+                              child: Image.asset('lib/Images/td.png')
+                          ),
+                        ]
+                    ),
                   ),  //dislike button
 
                   SizedBox(width: 24,),
 
                   GestureDetector(
-                    onTap: onTap,
+                    onTap: onTapLike,
                     child: Stack(
                         children: [
                           Image.asset('lib/Images/ecu.png'),
-
                           Positioned(
                               bottom: 17,
                               left: 18,
@@ -237,7 +244,7 @@ class FriendsCard extends StatelessWidget{
   String name = "";
   int age = 0;
   String place = "";
-  List<InstantMember> friends = [];
+  List friends = [];
 
   FriendsCard({Key? key, required SearchMember? member}) : super(key: key){
     image = member == null ? "" : member!.mainImage!;
@@ -276,7 +283,7 @@ class FriendsCard extends StatelessWidget{
                     context,
                     MaterialPageRoute(
                       builder: (context) =>
-                          InvitationWaitingScreen(),
+                          UserInformationScreen(id: friends[index].id),
                     ),
                   )),
                   child: Container(
@@ -296,7 +303,7 @@ class FriendsCard extends StatelessWidget{
                         image: image != null
                             ? DecorationImage(
                           fit: BoxFit.cover,
-                          image: NetworkImage(friends[index].mainImage),
+                          image: NetworkImage('${friends[index].mainImage}'),
                         )
                             : DecorationImage(
                           fit: BoxFit.cover,

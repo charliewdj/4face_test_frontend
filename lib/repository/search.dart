@@ -27,30 +27,27 @@ class SearchNotifier extends ChangeNotifier{
       if(isFirst){
         showingMember = newMember;
         notifyListeners();
+        print("notified");
         isFirst = false;
       }
       members.add(newMember);
       notifyListeners();
+      print("notified");
     }
   }
 
   like() async {
-    print("memberChanged");
     if(showingMember == null){return;}
-    print("A");
     final res = await asyncGet("register/like/like.php", {"ID":showingMember!.id!}, globalJwt);
     final data = await jsonDecode(res);
-    print(data);
-    // if(data["result"] == "failed"){return;}
+    if(data["result"] == "failed"){return;}
     members.removeAt(0);
     if(members.isEmpty){
       init();
     }else{
       showingMember = members[0];
-
     }
     notifyListeners();
-
   }
 
   disLike() async {

@@ -5,8 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:four_face_frontend/Page/home_screen.dart';
 import 'package:four_face_frontend/Page/profile_screen.dart';
 
-class FindFriendsScreen3 extends StatelessWidget {
-  const FindFriendsScreen3({Key? key}) : super(key: key);
+class FindFriendsRegistered extends StatelessWidget {
+  const FindFriendsRegistered({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
