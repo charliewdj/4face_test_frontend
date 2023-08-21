@@ -9,19 +9,18 @@ import 'package:four_face_frontend/repository/memberData.dart';
 
 class FindFriendsResult extends ConsumerWidget {
 
-  String id = '';
+  final String id;
   String name = '';
   String imageUrl = '';
   int age = 0;
   String place = '';
-  FindFriendsResult({Key? key, required String? id}) : super(key: key);
+  FindFriendsResult({Key? key, required this.id}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
 
     MemberDataNotifier memberDataNotifier = ref.watch(memberDataProvider(id)) as MemberDataNotifier;
 
-    id = memberDataNotifier.id == null ? '' : memberDataNotifier.id;
     name = memberDataNotifier.name == null ? '' : memberDataNotifier.name;
     imageUrl = memberDataNotifier.mainImage == null ? '' : memberDataNotifier!.mainImage!;
     age = memberDataNotifier.age == null ? 0 : memberDataNotifier!.age!;
@@ -87,7 +86,7 @@ class FindFriendsResult extends ConsumerWidget {
                       ),
                       SizedBox(height: 16),
                       Text(
-                        '${name}',
+                        memberDataNotifier.name,
                         style: TextStyle(
                             fontWeight: FontWeight.w700, fontSize: 22),
                       ),
@@ -98,7 +97,7 @@ class FindFriendsResult extends ConsumerWidget {
                       SizedBox(
                         height: 8,
                       ),
-                      Text('${age}際・${place}'),
+                      Text('${memberDataNotifier.age}際・${memberDataNotifier.place}'),
                     ],
                   ),
                   SizedBox(height: 30,),
