@@ -2,19 +2,24 @@
 
 
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:four_face_frontend/Page/profile_edit_screen.dart';
 import 'package:four_face_frontend/Page/user_information_screen.dart';
+import 'package:four_face_frontend/class/Instant_member.dart';
 
-class InvitationWaitingScreen extends StatefulWidget {
-  const InvitationWaitingScreen({Key? key}) : super(key: key);
+// class InvitationWaitingScreen extends StatefulWidget {
+//   const InvitationWaitingScreen({Key? key}) : super(key: key);
+//
+//   @override
+//   State<InvitationWaitingScreen> createState() => _InvitationWaitingScreen();
+// }
+
+class InvitationWaitingScreen extends ConsumerWidget {
+  const InvitationWaitingScreen({super.key});
+
 
   @override
-  State<InvitationWaitingScreen> createState() => _InvitationWaitingScreen();
-}
-
-class _InvitationWaitingScreen extends State<InvitationWaitingScreen> {
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context,WidgetRef ref) {
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -83,7 +88,8 @@ class _InvitationWaitingScreen extends State<InvitationWaitingScreen> {
 }
 
 class Grid extends StatelessWidget {
-
+  Grid({super.key, Key? key, required this.pairs});
+  final List<InstantMember> pairs;
   @override
   Widget build(BuildContext context) {
     return Flexible(
@@ -96,7 +102,7 @@ class Grid extends StatelessWidget {
           mainAxisSpacing: 12.0,
           mainAxisExtent: 300,
         ),
-        itemCount: 5,
+        itemCount: pairs.length,
         itemBuilder: (_,index){
           return GestureDetector(
             onTap: (() => Navigator.push(
@@ -122,7 +128,7 @@ class Grid extends StatelessWidget {
                         topRight: Radius.circular(16.0),
                       ),
                       child: Image.network(
-                        'https://shorturl.at/fgwH1',
+                        pairs[index].mainImage,
                         height: 220,
                         width: double.infinity,
                         fit: BoxFit.cover,
@@ -132,9 +138,9 @@ class Grid extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text('Minami', style: TextStyle(color: Colors.white),),
+                        Text(pairs[index].name, style: TextStyle(color: Colors.white),),
                         const SizedBox(height: 8.0,),
-                        Text('25歳・東京', style: TextStyle(color: Colors.white),),
+                        Text('${pairs[index].age}歳・${pairs[index].place}', style: TextStyle(color: Colors.white),),
                       ],),)
                 ],
               ),

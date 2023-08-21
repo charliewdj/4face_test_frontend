@@ -2,6 +2,7 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class ProfileEditScreen extends StatefulWidget {
   @override
@@ -94,7 +95,7 @@ class ProfileEditScreenState extends State<ProfileEditScreen> {
             maxLines: 2,
             decoration: const InputDecoration(
               border: InputBorder.none,
-              labelText: '体系',
+              labelText: '体型',
             ),
           ),
           TextFormField(

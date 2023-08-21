@@ -4,9 +4,12 @@ import 'dart:io';
 
 import 'package:age_calculator/age_calculator.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:four_face_frontend/class/Instant_member.dart';
 import 'package:four_face_frontend/functions/http_function.dart';
 import 'package:four_face_frontend/repository/user.dart';
+
+ChangeNotifierProvider offersProvider = ChangeNotifierProvider<OffersNotifier>((ref) => OffersNotifier());
 
 class OffersNotifier extends ChangeNotifier{
   OffersNotifier();

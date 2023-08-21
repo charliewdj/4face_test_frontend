@@ -27,12 +27,10 @@ class SearchNotifier extends ChangeNotifier{
       if(isFirst){
         showingMember = newMember;
         notifyListeners();
-        print("notified");
         isFirst = false;
       }
       members.add(newMember);
       notifyListeners();
-      print("notified");
     }
   }
 
@@ -48,6 +46,7 @@ class SearchNotifier extends ChangeNotifier{
       showingMember = members[0];
     }
     notifyListeners();
+    print("memberChanged")
   }
 
   disLike() async {
