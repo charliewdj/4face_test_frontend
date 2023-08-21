@@ -79,7 +79,7 @@ class SearchScreen extends ConsumerWidget {
       ),
       body: Column(
         children: [
-          UserCard(member: showing),
+          UserCard(member: showing, onTap: () {(ref.read(searchProvider) as SearchNotifier).like();}),
           
           Padding(
             padding: const EdgeInsets.fromLTRB(16, 16, 16, 8),
@@ -99,8 +99,9 @@ class UserCard extends StatelessWidget {
   String name = "";
   int age = 0;
   String place = "";
+  final void Function() onTap;
 
-  UserCard({Key? key, required SearchMember? member}) : super(key: key){
+  UserCard({Key? key, required SearchMember? member, required this.onTap}) : super(key: key){
     image = member == null ? "" : member!.mainImage!;
     id = member == null ? "" : member!.id!;
     name = member == null ? "" : member!.name!;
@@ -205,16 +206,19 @@ class UserCard extends StatelessWidget {
 
                   SizedBox(width: 24,),
 
-                  Stack(
-                      children: [
-                        Image.asset('lib/Images/ecu.png'),
+                  GestureDetector(
+                    onTap: onTap,
+                    child: Stack(
+                        children: [
+                          Image.asset('lib/Images/ecu.png'),
 
-                        Positioned(
-                            bottom: 17,
-                            left: 18,
-                            child: Image.asset('lib/Images/tu.png')
-                        ),
-                      ]
+                          Positioned(
+                              bottom: 17,
+                              left: 18,
+                              child: Image.asset('lib/Images/tu.png')
+                          ),
+                        ]
+                    ),
                   ),  //like button
 
 
