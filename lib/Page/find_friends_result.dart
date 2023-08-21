@@ -2,7 +2,7 @@
 
 
 import 'package:flutter/material.dart';
-import 'package:four_face_frontend/Page/find_friends_screen3.dart';
+import 'package:four_face_frontend/Page/find_friends_regisered.dart';
 
 class FindFriendsScreen2 extends StatelessWidget {
   const FindFriendsScreen2({Key? key}) : super(key: key);

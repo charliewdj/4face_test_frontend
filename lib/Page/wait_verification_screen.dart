@@ -88,7 +88,7 @@ class _WaitingVerificationScreen extends State<WaitVerificationScreen> {
               ),
             ),
 
-          SizedBox(height: 330,),
+          const SizedBox(height: 330),
 
           Container(
             width: 390,

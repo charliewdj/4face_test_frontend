@@ -32,7 +32,7 @@ class UserInformationScreen extends ConsumerWidget {
                   itemBuilder: (context, index) {
                     //final user_info = foods[index];
 
-                    return buildFood();
+                    return buildFood(member: memberDataNotifier);
                   },
                 ),
               )

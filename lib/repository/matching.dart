@@ -11,7 +11,7 @@ import 'package:four_face_frontend/repository/user.dart';
 ChangeNotifierProvider matchProvider = ChangeNotifierProvider<MatchNotifier>((ref) => MatchNotifier());
 
 class MatchNotifier extends ChangeNotifier{
-  MatchNotifier();
+  MatchNotifier(){init();}
   List<Matching> toActMatchList = [];
   List<Matching> actedMatchList = [];
 
@@ -19,8 +19,9 @@ class MatchNotifier extends ChangeNotifier{
   init() async {
     final res = await asyncGet("main/match/matchList.php", {}, globalJwt);
     final data = await jsonDecode(res) as List<dynamic>;
+    print(data);
     for (var element in data) {
-      final id = element["ID"];
+      final id = element["matchID"];
       final md = element["male1"];
       final male = InstantMember(
           id: md["ID"],

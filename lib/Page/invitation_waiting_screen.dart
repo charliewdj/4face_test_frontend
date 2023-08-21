@@ -6,6 +6,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:four_face_frontend/Page/profile_edit_screen.dart';
 import 'package:four_face_frontend/Page/user_information_screen.dart';
 import 'package:four_face_frontend/class/Instant_member.dart';
+import 'package:four_face_frontend/repository/memberData.dart';
+import 'package:four_face_frontend/repository/user.dart';
 
 // class InvitationWaitingScreen extends StatefulWidget {
 //   const InvitationWaitingScreen({Key? key}) : super(key: key);
@@ -15,11 +17,13 @@ import 'package:four_face_frontend/class/Instant_member.dart';
 // }
 
 class InvitationWaitingScreen extends ConsumerWidget {
-  const InvitationWaitingScreen({super.key});
-
+  const InvitationWaitingScreen({super.key,required this.id});
+  final String id;
 
   @override
   Widget build(BuildContext context,WidgetRef ref) {
+    MemberDataNotifier memberDataNotifier = ref.watch(memberDataProvider(id));
+
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -80,7 +84,7 @@ class InvitationWaitingScreen extends ConsumerWidget {
 
           SizedBox(height: 16,),
 
-          Grid(),
+          // Grid(),
         ],
       ),
     );
@@ -88,7 +92,7 @@ class InvitationWaitingScreen extends ConsumerWidget {
 }
 
 class Grid extends StatelessWidget {
-  Grid({super.key, Key? key, required this.pairs});
+  Grid({super.key, required this.pairs});
   final List<InstantMember> pairs;
   @override
   Widget build(BuildContext context) {
@@ -109,7 +113,7 @@ class Grid extends StatelessWidget {
               context,
               MaterialPageRoute(
                 builder: (context) =>
-                    UserInformationScreen(),
+                    UserInformationScreen(id:globalID),
               ),
             )),
             child: Container(

@@ -237,7 +237,7 @@ class FriendsCard extends StatelessWidget{
   String name = "";
   int age = 0;
   String place = "";
-  List friends = [];
+  List<InstantMember> friends = [];
 
   FriendsCard({Key? key, required SearchMember? member}) : super(key: key){
     image = member == null ? "" : member!.mainImage!;
@@ -296,7 +296,7 @@ class FriendsCard extends StatelessWidget{
                         image: image != null
                             ? DecorationImage(
                           fit: BoxFit.cover,
-                          image: NetworkImage('${image}'),
+                          image: NetworkImage(friends[index].mainImage),
                         )
                             : DecorationImage(
                           fit: BoxFit.cover,
