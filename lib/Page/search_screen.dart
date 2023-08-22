@@ -137,7 +137,7 @@ class UserCard extends StatelessWidget {
           children: [
             Container(
               width: 680,
-              height: 500,
+              height: 400,
               decoration: BoxDecoration(
                   image: DecorationImage(
                       fit: BoxFit.cover,
@@ -157,7 +157,7 @@ class UserCard extends StatelessWidget {
             ),
             Container(
               width: 680,
-              height: 500,
+              height: 400,
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(24),
                   gradient: LinearGradient(colors: [

@@ -17,12 +17,18 @@ import 'package:four_face_frontend/repository/user.dart';
 // }
 
 class InvitationWaitingScreen extends ConsumerWidget {
-  const InvitationWaitingScreen({super.key,required this.id});
+  InvitationWaitingScreen({super.key,required this.id});
   final String id;
+  String? name;
+  List<InstantMember>? pairs;
+
 
   @override
   Widget build(BuildContext context,WidgetRef ref) {
     MemberDataNotifier memberDataNotifier = ref.watch(memberDataProvider(id)) as MemberDataNotifier;
+
+    name = memberDataNotifier == null ? '' : memberDataNotifier!.name!;
+    pairs = memberDataNotifier == null ? [] : memberDataNotifier!.pairs!;
 
     return Scaffold(
       appBar: AppBar(
@@ -36,8 +42,7 @@ class InvitationWaitingScreen extends ConsumerWidget {
         elevation: 0,
         title: Row(
           children: [
-            Text('ゆうさん', style: TextStyle(color: Colors.black),)
-
+            Text('${name}さん', style: TextStyle(color: Colors.black),)
           ],
         ),
       ),
@@ -48,7 +53,7 @@ class InvitationWaitingScreen extends ConsumerWidget {
               padding: const EdgeInsets.all(24),
               child: Column(
                 children: [
-                  Text('ゆうさんとマッチしました', style: TextStyle(fontWeight: FontWeight.w700, fontSize: 22 ),),
+                  Text('${name}さんとマッチしました', style: TextStyle(fontWeight: FontWeight.w700, fontSize: 22 ),),
 
                   SizedBox(height: 8),
 
@@ -84,7 +89,7 @@ class InvitationWaitingScreen extends ConsumerWidget {
 
           SizedBox(height: 16,),
 
-          // Grid(),
+          Grid(pairs: this.pairs,),
         ],
       ),
     );
@@ -93,7 +98,7 @@ class InvitationWaitingScreen extends ConsumerWidget {
 
 class Grid extends StatelessWidget {
   Grid({super.key, required this.pairs});
-  final List<InstantMember> pairs;
+  final List<InstantMember>? pairs;
   @override
   Widget build(BuildContext context) {
     return Flexible(
@@ -106,7 +111,7 @@ class Grid extends StatelessWidget {
           mainAxisSpacing: 12.0,
           mainAxisExtent: 300,
         ),
-        itemCount: pairs.length,
+        itemCount: pairs!.length,
         itemBuilder: (_,index){
           return GestureDetector(
             onTap: (() => Navigator.push(
@@ -132,7 +137,7 @@ class Grid extends StatelessWidget {
                         topRight: Radius.circular(16.0),
                       ),
                       child: Image.network(
-                        pairs[index].mainImage,
+                        pairs![index].mainImage,
                         height: 220,
                         width: double.infinity,
                         fit: BoxFit.cover,
@@ -142,9 +147,9 @@ class Grid extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(pairs[index].name, style: TextStyle(color: Colors.white),),
+                        Text(pairs![index].name, style: TextStyle(color: Colors.white),),
                         const SizedBox(height: 8.0,),
-                        Text('${pairs[index].age}歳・${pairs[index].place}', style: TextStyle(color: Colors.white),),
+                        Text('${pairs![index].age}歳・${pairs![index].place}', style: TextStyle(color: Colors.white),),
                       ],),)
                 ],
               ),

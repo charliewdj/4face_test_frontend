@@ -8,6 +8,7 @@ import 'package:four_face_frontend/Page/good_screen.dart';
 import 'package:four_face_frontend/Page/home_screen.dart';
 import 'package:four_face_frontend/Page/invitation_waiting_screen.dart';
 import 'package:four_face_frontend/Page/register_screen.dart';
+import 'package:four_face_frontend/Page/wait_verification_screen.dart';
 import 'package:four_face_frontend/repository/matching.dart';
 
 import '../repository/offers.dart';
@@ -122,7 +123,14 @@ class ToActMatch extends StatelessWidget{
                             builder: (context) => InvitationWaitingScreen(id: matches[index].me.id),
                           ),
                         );
-                      }
+                      } else {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => WaitVerificationScreen(toActedMatchList: matches[index],),
+                          ),
+                        );
+                      };
                     },
 
                     child: Container(
