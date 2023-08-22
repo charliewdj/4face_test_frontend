@@ -12,12 +12,12 @@ import 'package:four_face_frontend/repository/user.dart';
 ChangeNotifierProvider memberDataProvider(String id) => ChangeNotifierProvider<MemberDataNotifier>((ref) => MemberDataNotifier(id:id));
 
 class MemberDataNotifier extends ChangeNotifier{
-  MemberDataNotifier({required this.id});
+  MemberDataNotifier({required this.id}){init();}
   final String id;
   late String name;
   late String jender;
   late int birthday;
-  late final int age = AgeCalculator.age(DateTime.fromMillisecondsSinceEpoch(birthday*1000)).years;
+  late final age = AgeCalculator.age(DateTime.fromMillisecondsSinceEpoch(birthday*1000)).years;
   late String place;
   late int tall;
   late String shape;
@@ -39,14 +39,14 @@ class MemberDataNotifier extends ChangeNotifier{
   List<InstantMember> pairs = [];
 
   init() async {
+    print(id);
     final res = await asyncGet("classResponce/member.php", {"ID":id}, globalJwt);
     final data = await jsonDecode(res);
-    print(data);
     name = data["name"] ?? "";
     jender = data["jender"] ?? "";
     birthday = data["birthday"] ?? 0;
     place = data["place"] ?? "";
-    tall = data["tall"] ?? "";
+    tall = data["tall"] ?? 0;
     shape = data["shape"] ?? "";
     blood = data["blood"] ?? "";
     birthplace = data["birthplace"] ?? "";
@@ -61,20 +61,21 @@ class MemberDataNotifier extends ChangeNotifier{
     holiday = data["holiday"] ?? "";
     explanation = data["explanation"] ?? "";
     mainImage = data["mainImage"] ?? "";
-    isActive = data["lastLogin"]==null ? false : (((data["lastLogin"] as int) + 30 * 24 * 60 * 60) * 1000 > DateTime.now().microsecondsSinceEpoch);
+    isActive = data["lastLogin"]==null ? false : (((data["lastLogin"] as int) + 30 * 24 * 60 * 60) * 1000 > DateTime.timestamp().millisecondsSinceEpoch);
     subImages = data["subImages"] ?? [];
     final pairsR = data["pair"] ?? {};
-    final pairsRaw = pairsR as Map<String,dynamic>;
-    pairsRaw.forEach((key, value) {
-      final newPair = InstantMember(
-          id: value["ID"],
-          name: value["name"],
-          place: value["place"],
-          age: AgeCalculator.age(DateTime.fromMillisecondsSinceEpoch(value["birthday"]*1000)).years,
-          mainImage: value["mainImage"]
-      );
-      pairs.add(newPair);
-    });
+    // final pairsRaw = pairsR as List<dynamic>;
+    print(pairsR);
+    // pairsRaw.forEach((value) {
+    //   final newPair = InstantMember(
+    //       id: value["ID"],
+    //       name: value["name"],
+    //       place: value["place"],
+    //       age: AgeCalculator.age(DateTime.fromMillisecondsSinceEpoch(value["birthday"]*1000)).years,
+    //       mainImage: value["mainImage"]
+    //   );
+    //   pairs.add(newPair);
+    // });
   }
   
 } 

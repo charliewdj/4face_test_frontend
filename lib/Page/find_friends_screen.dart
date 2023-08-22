@@ -74,7 +74,7 @@ class FindFriendsScreen extends StatelessWidget {
                     //   }
                     //   return null;
                     // },
-                    onSaved: (value) {
+                    onChanged: (value) {
                       inputTextId = value!;
                     },
                   ),
@@ -90,7 +90,7 @@ class FindFriendsScreen extends StatelessWidget {
                     onTap: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => FindFriendsResult(id: inputTextId)),
+                        MaterialPageRoute(builder: (context) => FindFriendsResult(id: inputTextId!)),
                       );
                     },
                     child: Container(
@@ -119,3 +119,4 @@ class FindFriendsScreen extends StatelessWidget {
     );
   }
 }
+
