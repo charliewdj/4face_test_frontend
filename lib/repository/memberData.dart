@@ -61,7 +61,7 @@ class MemberDataNotifier extends ChangeNotifier{
     holiday = data["holiday"] ?? "";
     explanation = data["explanation"] ?? "";
     mainImage = data["mainImage"] ?? "";
-    isActive = data["lastLogin"]==null ? false : (((data["lastLogin"] as int) + 30 * 24 * 60 * 60) * 1000 > DateTime.timestamp().millisecondsSinceEpoch);
+    //isActive = data["lastLogin"]==null ? false : (((data["lastLogin"] as int) + 30 * 24 * 60 * 60) * 1000 > DateTime.timestamp().millisecondsSinceEpoch);
     subImages = data["subImages"] ?? [];
     final pairsR = data["pair"] ?? {};
     // final pairsRaw = pairsR as List<dynamic>;
